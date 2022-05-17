@@ -1,0 +1,42 @@
+{% extends 'base.ecole.html.twig' %}
+
+{% block title %}Gestion des parents
+{% endblock %}
+
+{% block body %}
+	<br><br>
+	<div class="container">
+		<a href="{{ path("ecole_parent_ajout") }}" class="btn btn-primary float-right">Ajouter un parent</a>
+		<div class="row">
+			<div class="col-12">
+				<table id="example" class="btnEdit table table-striped table-bordered" style="width:100%">
+					<thead>
+						<tr>
+							<td>Nom</td>
+							<td>Prenom</td>
+                            <td>Telephone</td>
+                            <td>Email</td>
+                            <td>Avtif</td>
+                            <td></td>
+						</tr>
+					</thead>
+					<tbody>
+						{% for parent in parents %}
+
+							<tr>
+								<th>{{parent.nom}}</th>
+								<th>{{parent.prenom}}</th>
+								<th>{{parent.telephone}}</th>
+								<th>{{parent.email}}</th>
+								<th>{{parent.IsActif}}</th>
+								<th>
+									<a href="{{ path("ecole_parent_modifier", {id: parent.id}) }}" class="btn btn-primary">Modifier</a>
+								</th>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}
