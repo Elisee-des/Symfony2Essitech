@@ -90,14 +90,13 @@ class EClasseController extends AbstractController
     public function delete(Classe $classe, ClasseRepository $classsRepo): Response
     {
 
-            $classsRepo->remove($classe, true);
+        $classsRepo->remove($classe, true);
 
-            $this->addFlash(
-                'message',
-                'Classe supprimer avec success'
-            );
+        $this->addFlash(
+            'message',
+            'Classe supprimer avec success'
+        );
 
-            return $this->redirectToRoute('ecole_classe_home');
-        }
-
+        return $this->redirectToRoute('ecole_classe_home');
+    }
 }

@@ -1,0 +1,15 @@
+{% extends 'base.ecole.html.twig' %}
+
+{% block title %}Ajout d'un eleve
+{% endblock %}
+
+{% block body %}
+	{% form_theme form "bootstrap_4_layout.html.twig" %}
+	<div class="card">
+		{{form(form)}}
+		</div>
+		<br>
+		<div>
+			<a href="{{ path("ecole_eleve_home") }}" class="btn btn-warning">Retour</a>
+		</div>
+	{% endblock %}

@@ -10,19 +10,16 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ParentType extends AbstractType
+class EditParentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('Nom', TextType::class)
             ->add('prenom')
-            ->add('email')
-            ->add('password')
             ->add('telephone')
-            ->add('localisation')
-            ->add('IsActif', CheckboxType::class)
-            ->add('Creer', SubmitType::class);
+            ->add('isParent', CheckboxType::class)
+            ->add('Modifier', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

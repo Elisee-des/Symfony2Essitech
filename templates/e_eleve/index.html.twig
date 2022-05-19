@@ -1,0 +1,44 @@
+{% extends 'base.ecole.html.twig' %}
+
+{% block title %}Gestion des eleves
+{% endblock %}
+
+{% block body %}
+	<br><br>
+	<h2>Gestion des eleves</h2>
+	<div class="container">
+		<a href="{{ path("ecole_eleve_ajout") }}" class="btn btn-primary float-right">Ajouter un eleve</a>
+		<div class="row">
+			<div class="col-12">
+				<table id="example" class="btnEdit table table-striped table-bordered" style="width:100%">
+					<thead>
+						<tr>
+							<td>ID</td>
+							<td>Nom</td>
+							<td>Prenom</td>
+							<td>Parent</td>
+							<td>Classe</td>
+							<td>Action</td>
+						</tr>
+					</thead>
+					<tbody>
+						{% for eleve in eleves %}
+
+							<tr>
+								<th>{{eleve.id}}</th>
+								<th>{{eleve.nom}}</th>
+								<th>{{eleve.prenom}}</th>
+								<th>{{eleve.parent.nom}} {{eleve.parent.prenom}}</th>
+								<th>{{eleve.Classe}}</th>
+								<th>
+									<a href="{{ path("ecole_eleve_modifier", {id: eleve.id}) }}" class="btn btn-primary">Modifier</a>
+									<a href="{{ path("ecole_eleve_delete", {id: eleve.id}) }}" class="btn btn-danger" onclick="return confirm('Etes vous sur de vouloir supprimer cet eleve ?')">Supprimer</a>
+								</th>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}

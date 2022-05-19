@@ -12,18 +12,20 @@
 				<table id="example" class="btnEdit table table-striped table-bordered" style="width:100%">
 					<thead>
 						<tr>
+							<td>ID</td>
 							<td>Nom</td>
 							<td>Prenom</td>
                             <td>Telephone</td>
                             <td>Email</td>
-                            <td>Avtif</td>
-                            <td></td>
+                            <td>Actif</td>
+                            <td>Action</td>
 						</tr>
 					</thead>
 					<tbody>
 						{% for parent in parents %}
 
 							<tr>
+								<th>{{parent.id}}</th>
 								<th>{{parent.nom}}</th>
 								<th>{{parent.prenom}}</th>
 								<th>{{parent.telephone}}</th>
@@ -31,6 +33,7 @@
 								<th>{{parent.IsActif}}</th>
 								<th>
 									<a href="{{ path("ecole_parent_modifier", {id: parent.id}) }}" class="btn btn-primary">Modifier</a>
+									<a href="{{ path("ecole_parent_modifier_password", {id: parent.id}) }}" class="btn btn-secondary">Modifier mot de pass</a>
 								</th>
 							</tr>
 						{% endfor %}
