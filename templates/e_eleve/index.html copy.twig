@@ -14,7 +14,7 @@
 					<thead>
 						<tr>
 							<td>ID</td>
-							<td>Image</td>
+							<td>image</td>
 							<td>Matricule</td>
 							<td>Nom</td>
 							<td>Prenom</td>
@@ -36,7 +36,8 @@
 								<th>{{eleve.matricule}}</th>
 								<th>{{eleve.nom}}</th>
 								<th>{{eleve.prenom}}</th>
-								<th>{{eleve.parent.nom}} {{eleve.parent.prenom}}</th>
+								<th>{{eleve.parent.nom}}
+									{{eleve.parent.prenom}}</th>
 								<th>{{eleve.Classe}}</th>
 								<th>
 									<a href="{{ path("ecole_eleve_modifier", {id: eleve.id}) }}" class="btn btn-primary">Modifier</a>

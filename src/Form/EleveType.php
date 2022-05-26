@@ -8,9 +8,11 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class EleveType extends AbstractType
 {
@@ -47,6 +49,19 @@ class EleveType extends AbstractType
             "query_builder" => $this->userRepo->findParentQb()
         ])
         ->add('classe')
+        ->add('photoFile', FileType::class, [
+            "label"=> "Photo de l'eleve",
+            "mapped" => false,
+            "constraints" => [
+                new File([
+                    "maxSize" => "2M",
+                    "mimeTypes" =>[
+                        "image/jpeg",
+                        "image/png"
+                    ]
+                ])
+            ]
+        ])
         ->add('Enregistrer', SubmitType::class)
     ;
     }

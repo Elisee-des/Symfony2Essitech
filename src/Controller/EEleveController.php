@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Eleve;
 use App\Form\EleveType;
 use App\Repository\EleveRepository;
+use App\Service\UploarderService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +28,7 @@ class EEleveController extends AbstractController
     /**
      * @Route("/e/eleve/ajout", name="ecole_eleve_ajout")
      */
-    public function add(Request $request, ManagerRegistry $managerRegistry): Response
+    public function add(Request $request, ManagerRegistry $managerRegistry, EleveRepository $eleveRepo, UploarderService $uploarderService): Response
     {
         $eleve = new Eleve();
 
@@ -35,7 +36,44 @@ class EEleveController extends AbstractController
 
         $form->handleRequest($request);
 
+        // if ($form->isSubmitted() && $form->isValid()) {
+
+        //     $photoFile = $form->get("photoFile")->getData();
+
+        //     $nomOrigine = $photoFile->getClientOriginalName();
+
+        //     $nouveauNomPhoto = $eleve->getMatricule() . "." . $photoFile->guessExtension();
+        //     // dd($this->getParameter("images_directory"));
+
+        //     $photoFile->move($this->getParameter("images_directory"), $nouveauNomPhoto);
+
+        //     $eleve->setPhoto($nouveauNomPhoto);
+
+        //     $eleveRepo->add($eleve, true);
+
+        //     $eleve = $form->getData();
+
+        //     $em = $managerRegistry->getManager();
+        //     $em->persist($eleve);
+        //     $em->flush();
+
+        //     $this->addFlash(
+        //         'message',
+        //         "L'eleve " . $eleve->getNom() . " " . $eleve->getPrenom() . " ajouter avec success"
+        //     );
+
+        //     return $this->redirectToRoute('ecole_eleve_home');
+        // }
+
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $photoFile = $form->get("photoFile")->getData();
+
+            $nouveauNomPhoto = $uploarderService->uploader($photoFile);
+
+            $eleve->setPhoto($nouveauNomPhoto);
+
+            $eleveRepo->add($eleve, true);
 
             $eleve = $form->getData();
 
@@ -45,7 +83,7 @@ class EEleveController extends AbstractController
 
             $this->addFlash(
                 'message',
-                "L' eleve ".$eleve->getNom(). " " .$eleve->getPrenom(). " ajouter avec success"
+                "L'eleve " . $eleve->getNom() . " " . $eleve->getPrenom() . " ajouter avec success"
             );
 
             return $this->redirectToRoute('ecole_eleve_home');
