@@ -39,6 +39,7 @@ class EleveType extends AbstractType
         // ;
 
         $builder
+        ->add('matricule')
         ->add('nom')
         ->add('prenom')
         ->add('parent', EntityType::class, [

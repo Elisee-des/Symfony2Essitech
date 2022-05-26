@@ -1,0 +1,18 @@
+{% extends 'base.ecole.html.twig' %}
+
+{% block title %}Gestion des NoteS
+{% endblock %}
+
+{% block body %}
+	<br><br>
+	<div class="container">
+    <h2>Ajoute des notes de la classe de {{classe}}</h2>
+		<div class="row">
+			<div class="col-12">
+				{% form_theme formulaire "bootstrap_4_horizontal_layout.html.twig" %}
+				<div class="card">
+					{{form(formulaire)}}
+					</div>
+				</div>
+			</div>
+		{% endblock %}

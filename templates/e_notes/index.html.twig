@@ -1,0 +1,40 @@
+{% extends 'base.ecole.html.twig' %}
+
+{% block title %}Gestion des Note
+{% endblock %}
+
+{% block body %}
+	<br><br>
+	<div class="container">
+		<a href="{{ path("ecole_notes_ajout") }}" class="btn btn-primary float-right">Ajouter note</a>
+		<div class="row">
+			<div class="col-12">
+				<table id="example" class="btnEdit table table-striped table-bordered" style="width:100%">
+					<thead>
+						<tr>
+							<td>Matricule</td>
+							<td>Eleve</td>
+							<td>Matiere</td>
+							<td>Note</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						{% for note in notes %}
+							<tr>
+								<th>{{note.eleve.matricule}}</th>
+								<th>{{note.eleve.nom}}</th>
+								<th>{{note.matiere}}</th>
+								<th>{{note.note}}</th>
+								<th>
+									<a href="{{ path("ecole_notes_ajout", {id: note.id}) }}" class="btn btn-primary">Modifier</a>
+									<a href="{{ path("ecole_notes_ajout", {id: note.id}) }}" class="btn btn-danger" onclick="return confirm('Etes vous sur de vouloir supprimer cette note ?')">Supprimer</a>
+								</th>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}

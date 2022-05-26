@@ -56,6 +56,16 @@ class Eleve
      */
     private $classe;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $matricule;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photo;
+
     // public function __toString()
     // {
     //     return $this->nom;
@@ -207,6 +217,30 @@ class Eleve
     public function setClasse(?Classe $classe): self
     {
         $this->classe = $classe;
+
+        return $this;
+    }
+
+    public function getMatricule(): ?string
+    {
+        return $this->matricule;
+    }
+
+    public function setMatricule(string $matricule): self
+    {
+        $this->matricule = $matricule;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

@@ -59,9 +59,9 @@ class EEleveController extends AbstractController
     /**
      * @Route("/e/eleve/modifier/{id}", name="ecole_eleve_modifier")
      */
-    public function edit(EleveType $eleve, Request $request, ManagerRegistry $managerReg): Response
+    public function edit(Eleve $eleve, Request $request, ManagerRegistry $managerReg): Response
     {
-        $form = $this->createForm(eleveType::class, $eleve);
+        $form = $this->createForm(EleveType::class, $eleve);
 
         $form->handleRequest($request);
 
