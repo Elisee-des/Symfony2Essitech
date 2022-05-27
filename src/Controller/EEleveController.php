@@ -98,7 +98,7 @@ class EEleveController extends AbstractController
     /**
      * @Route("/e/eleve/modifier/{id}", name="ecole_eleve_modifier")
      */
-    public function edit(Eleve $eleve, Request $request, ManagerRegistry $managerReg): Response
+    public function edit(Eleve $eleve, Request $request, ManagerRegistry $managerRegistry, EleveRepository $eleveRepo, UploaderService $uploarderService): Response
     {
         $form = $this->createForm(EleveType::class, $eleve);
 
@@ -106,15 +106,23 @@ class EEleveController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $photoFile = $form->get("photoFile")->getData();
+
+            $nouveauNomPhoto = $uploarderService->uploader($this->getParameter("images_directory"), $photoFile);
+
+            $eleve->setPhoto($nouveauNomPhoto);
+
+            $eleveRepo->add($eleve, true);
+
             $eleve = $form->getData();
 
-            $em = $managerReg->getManager();
+            $em = $managerRegistry->getManager();
             $em->persist($eleve);
             $em->flush();
 
             $this->addFlash(
                 'message',
-                'eleve Modifier avec success'
+                "L'eleve " . $eleve->getNom() . " " . $eleve->getPrenom() . " modifier avec success"
             );
 
             return $this->redirectToRoute('ecole_eleve_home');

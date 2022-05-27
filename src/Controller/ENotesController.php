@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Classe;
 use App\Entity\Note;
+use App\Form\NoteType;
 use App\Repository\ClasseRepository;
 use App\Repository\NoteRepository;
 use App\Service\EnvoieNoteService as ServiceEnvoieNoteService;
@@ -148,5 +149,49 @@ class ENotesController extends AbstractController
             "formulaire" => $form->createView(),
             "classe" => $classe
         ]);
+    }
+
+    /**
+     * @Route("/e/note/modifier/{id}", name="ecole_note_modifier") 
+     */
+    public function edit(Note $note, Request $request, ManagerRegistry $managerRegistry): Response
+    {
+        $form = $this->createForm(NoteType::class, $note);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $managerRegistry->getManager();
+            $em->persist($note);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                'Modifier avec success'
+            );
+
+            return $this->redirectToRoute('ecole_notes_home');
+        }
+
+        return $this->render('e_notes/noteEdit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/e/note/supprimer/{id}", name="ecole_note_delete")
+     */
+    public function delete(Note $note, NoteRepository $noteRepo): Response
+    {
+
+        $noteRepo->remove($note, true);
+
+        $this->addFlash(
+            'message',
+            'note supprimer avec success'
+        );
+
+        return $this->redirectToRoute('ecole_notes_home');
     }
 }

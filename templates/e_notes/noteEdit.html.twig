@@ -1,0 +1,18 @@
+{% extends 'base.ecole.html.twig' %}
+
+{% block title %}Edite de la note
+{% endblock %}
+
+{% block body %}
+	<br><br>
+	<div class="container">
+    <h3>Edite de la note</h3>
+		<div class="row">
+			<div class="col-12">
+				{% form_theme form "bootstrap_4_layout.html.twig" %}
+				<div class="card">
+					{{form(form)}}
+					</div>
+				</div>
+			</div>
+		{% endblock %}
