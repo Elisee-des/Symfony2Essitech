@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Eleve;
 use App\Form\EleveType;
 use App\Repository\EleveRepository;
+use App\Service\UploaderService;
 use App\Service\UploarderService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +29,7 @@ class EEleveController extends AbstractController
     /**
      * @Route("/e/eleve/ajout", name="ecole_eleve_ajout")
      */
-    public function add(Request $request, ManagerRegistry $managerRegistry, EleveRepository $eleveRepo, UploarderService $uploarderService): Response
+    public function add(Request $request, ManagerRegistry $managerRegistry, EleveRepository $eleveRepo, UploaderService $uploarderService): Response
     {
         $eleve = new Eleve();
 
@@ -69,7 +70,7 @@ class EEleveController extends AbstractController
 
             $photoFile = $form->get("photoFile")->getData();
 
-            $nouveauNomPhoto = $uploarderService->uploader($photoFile);
+            $nouveauNomPhoto = $uploarderService->uploader($this->getParameter("images_directory"), $photoFile);
 
             $eleve->setPhoto($nouveauNomPhoto);
 
