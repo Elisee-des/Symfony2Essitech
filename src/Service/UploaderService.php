@@ -7,12 +7,16 @@ class UploaderService {
 
     private $directory;
 
-    private $nouveauNom;
-    
-    public function uploader($dossier, UploadedFile $fichier, $nom=null)
-    {
-        $this->directory = $dossier;
+    private $images_directory;
 
+    public function __construct($images_directory)
+    {
+        $this->directory = $images_directory;
+        
+    }
+    
+    public function uploader(UploadedFile $fichier, $nom=null)
+    {
         if (!$nom) {
             $nom = uniqid();
         }

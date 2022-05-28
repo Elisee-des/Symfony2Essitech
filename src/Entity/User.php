@@ -81,6 +81,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $IsActif;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $lastConnexion;
+
     public function __toString()
     {
         return $this->Nom." ".$this->prenom.($this->telephone);
@@ -309,6 +314,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsActif(bool $IsActif): self
     {
         $this->IsActif = $IsActif;
+
+        return $this;
+    }
+
+    public function getLastConnexion(): ?\DateTimeInterface
+    {
+        return $this->lastConnexion;
+    }
+
+    public function setLastConnexion(\DateTimeInterface $lastConnexion): self
+    {
+        $this->lastConnexion = $lastConnexion;
 
         return $this;
     }
