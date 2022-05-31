@@ -203,16 +203,16 @@ class ENotesController extends AbstractController
     public function noteImport(Request $request): Response
     {
         $form = $this->createForm(ImporterNoteType::class);
-        
+
         $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) { 
-            
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
             $fichier = $form->get('fichier')->getData();
 
             $chemin = $fichier->getPathName();
 
-            $reader = ReaderEntityFactory::createXLSReader();
+            $reader = ReaderEntityFactory::createXLSXReader();
 
             $reader->open($chemin);
 

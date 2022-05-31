@@ -17,9 +17,9 @@ class ImporterNoteType extends AbstractType
             ->add('fichier', FileType::class, [
                 "constraints" => [
                     new File([
-                        "maxSize" => "1M",
+                        "maxSize" => "2M",
                         "mimeTypes" =>[
-                            "application/vnd.ms-excel",
+                            "application/vnd.oasis.opendocument.spreadsheet",
                             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                         ]
                     ])
