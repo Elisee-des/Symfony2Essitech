@@ -70,7 +70,7 @@ class EEleveController extends AbstractController
 
             $photoFile = $form->get("photoFile")->getData();
 
-            $nouveauNomPhoto = $uploarderService->uploader($this->getParameter("images_directory"), $photoFile);
+            $nouveauNomPhoto = $uploarderService->uploader($photoFile);
 
             $eleve->setPhoto($nouveauNomPhoto);
 
@@ -108,7 +108,7 @@ class EEleveController extends AbstractController
 
             $photoFile = $form->get("photoFile")->getData();
 
-            $nouveauNomPhoto = $uploarderService->uploader($this->getParameter("images_directory"), $photoFile);
+            $nouveauNomPhoto = $uploarderService->uploader($photoFile);
 
             $eleve->setPhoto($nouveauNomPhoto);
 

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Classe;
 use App\Entity\Note;
+use App\Form\ImporterNoteType;
 use App\Form\NoteType;
 use App\Repository\ClasseRepository;
 use App\Repository\NoteRepository;
@@ -20,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 
 class ENotesController extends AbstractController
 {
@@ -193,5 +195,40 @@ class ENotesController extends AbstractController
         );
 
         return $this->redirectToRoute('ecole_notes_home');
+    }
+
+    /**
+     * @Route("/e/notes/importer", name="ecole_notes_importer")
+     */
+    public function noteImport(Request $request): Response
+    {
+        $form = $this->createForm(ImporterNoteType::class);
+        
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) { 
+            
+            $fichier = $form->get('fichier')->getData();
+
+            $chemin = $fichier->getPathName();
+
+            $reader = ReaderEntityFactory::createXLSReader();
+
+            $reader->open($chemin);
+
+            $tab = [];
+
+            foreach ($reader->getSheetIterator() as $sheet) {
+                foreach ($sheet->getRowIterator() as $row) {
+
+                    $tab = $row->toArray();
+                }
+            }
+            dd($tab);
+        }
+
+        return $this->render('e_notes/importer.html.twig', [
+            "form" => $form->createView()
+        ]);
     }
 }

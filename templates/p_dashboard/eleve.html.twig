@@ -1,0 +1,36 @@
+{% extends 'base.parent.html.twig' %}
+
+{% block title %}Gestion des classes
+{% endblock %}
+
+{% block body %}
+	<br><br>
+	<div class="container">
+		<h2>Liste de mes eleves</h2>
+		<div class="row">
+			<div class="col-12">
+				<table id="example" class="btnEdit table table-striped table-bordered" style="width:100%">
+					<thead>
+						<tr>
+							<td>Matricule</td>
+							<td>Nom</td>
+							<td>Prenom</td>
+                            <td>classe</td>
+                            <td>Action</td>
+						</tr>
+					</thead>
+						{% for eleve in eleves %}
+					<tbody>
+
+							<td>{{ eleve.matricule }}</td>
+							<td>{{ eleve.nom }}</td>
+							<td>{{ eleve.prenom }}</td>
+							<td>{{ eleve.classe }}</td>
+							<td><a href="{{ path("parent_eleve_note", {id: eleve.id}) }}" class="btn btn-primary">Voir les notes</a></td>
+					</tbody>
+						{% endfor %}
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -66,9 +66,9 @@
 
 <div class="nav-scroller bg-body shadow-sm">
   <nav class="nav nav-underline" aria-label="Secondary navigation">
-    <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+    <a class="nav-link {{ isActive(["parent_dashboard"]) }} " aria-current="page" href="{{ path("parent_dashboard") }}">Dashboard</a>
    
-    <a class="nav-link" href="#">Eleves</a>
+    <a class="nav-link {{ isActive(["parent_eleve_liste", "parent_eleve_note"]) }}" href="{{ path("parent_eleve_liste") }}">Eleves</a>
     <a class="nav-link" href="#">Messages</a>
     <a class="nav-link" href="#">Actualites</a>
   </nav>

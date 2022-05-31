@@ -1,0 +1,17 @@
+{% extends 'base.ecole.html.twig' %}
+
+{% block title %}Gestion des eleves
+{% endblock %}
+
+{% block body %}
+	<br><br>
+	<h2>Gestion des eleves</h2>
+	<div class="container">
+		<a href="{{ path("ecole_eleve_ajout") }}" class="btn btn-primary float-right">Ajouter un eleve</a>
+		<div class="row">
+			<div class="col-12">
+				{{ form(form) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}
