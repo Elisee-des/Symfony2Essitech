@@ -70,6 +70,7 @@ class EleveType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Eleve::class,
+            'csrf_protection' => false
         ]);
     }
 }
