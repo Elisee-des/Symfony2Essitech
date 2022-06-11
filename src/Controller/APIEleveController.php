@@ -55,7 +55,7 @@ class APIEleveController extends AbstractController
     {
         $data = $request->getContent();
 
-        
+        dd($data);
         $dataDecode = json_decode($data, true);
         
         $eleve = new Eleve();

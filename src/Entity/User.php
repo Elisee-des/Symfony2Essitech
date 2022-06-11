@@ -86,6 +86,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $lastConnexion;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $apitoken;
+
     public function __toString()
     {
         return $this->Nom." ".$this->prenom.($this->telephone);
@@ -326,6 +331,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastConnexion(\DateTimeInterface $lastConnexion): self
     {
         $this->lastConnexion = $lastConnexion;
+
+        return $this;
+    }
+
+    public function getApitoken(): ?string
+    {
+        return $this->apitoken;
+    }
+
+    public function setApitoken(string $apitoken): self
+    {
+        $this->apitoken = $apitoken;
 
         return $this;
     }
